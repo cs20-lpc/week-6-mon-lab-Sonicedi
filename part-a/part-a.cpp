@@ -62,3 +62,19 @@ int main() {
     // terminate
     return 0;
 }
+
+
+template <typename T>
+static T findMaxRecTail_impl(const T arr[], int size, int idx, T currentMax){
+    if (idx == size) return currentMax;
+    if (arr[idx] > currentMax) currentMax = arr[idx];
+    return findMaxRecTail_impl(arr, size, idx + 1, currentMax);
+}
+
+template <typename T>
+T findMaxRecTail(const T arr[], const int SIZE, int i){
+    if (SIZE <= 0) return T();
+    if (i < 0) i = 0;
+    if (i >= SIZE) i = SIZE - 1;
+    return findMaxRecTail_impl(arr, SIZE, i + 1, arr[i]);
+}
